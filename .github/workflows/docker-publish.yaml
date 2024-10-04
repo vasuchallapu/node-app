@@ -14,19 +14,7 @@ jobs:
       # Checkout the code from your repo
       - name: Checkout code
         uses: actions/checkout@v3
-
-      # Set up Node.js environment
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'  # You can use any version of Node.js as per your requirement
-
-      # Install dependencies and run build
-      - name: Install dependencies and build
-        run: |
-          npm ci
-          npm run build
-
+      
       # Log in to Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
