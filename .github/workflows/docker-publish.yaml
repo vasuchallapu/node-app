@@ -24,8 +24,12 @@ jobs:
 
       # Build Docker image
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/your-app-name:latest .
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/node-app:${{ github.sha }} .
+          docker tag ${{ secrets.DOCKER_USERNAME }}/node-app:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/node-app:latest
 
       # Push Docker image to Docker Hub
       - name: Push Docker image to Docker Hub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/your-app-name:latest
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/node-app:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/node-app:latest
